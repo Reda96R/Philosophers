@@ -1,5 +1,4 @@
 #include "includes/philo.h"
-#include <pthread.h>
 
 void  ft_only_one(void *philo)
 {

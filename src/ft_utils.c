@@ -1,13 +1,5 @@
 #include "includes/philo.h"
 
-long long ft_initial_t(void)
-{
-  struct timeval  initial_t;
-
-  gettimeofday(&initial_t, NULL);
-  return ((initial_t.tv_sec * 1000) + (initial_t.tv_usec / 1000));
-}
-
 void  ft_errors_buster(int err_id)
 {
   printf("/033[0;31m");
@@ -50,15 +42,19 @@ void  ft_data_filler(t_data *data, char *av[])
   data->t_to_eat = ft_atoi(av[3]);
   data->t_to_sleep = ft_atoi(av[4]);
   data->initial_t = ft_initial_t();
+  data->g_e = 0; 
   if (av[5])
     data->meals = ft_atoi(av[5]);
-  data->philo = (t_philo *)malloc(sizeof (t_philo) * data->philos_nb);
-  data->fork = (pthread_mutex_t *)malloc(sizeof (pthread_mutex_t) * data->philos_nb);
+  else
+    data->meals = 0;
+  data->philo = (t_philo *) malloc(sizeof (t_philo) * data->philos_nb);
+  data->fork = (pthread_mutex_t *) malloc(sizeof (pthread_mutex_t) * data->philos_nb);
   pthread_mutex_init(&data->cout, NULL);
   pthread_mutex_init(&data->checker, NULL);
   while (data->philos_nb > i)
     pthread_mutex_init(&data->fork[i++], NULL);
   ft_philo_filler(data);
+  data->initial_t = ft_initial_t();
 }
 
 void  ft_philo_filler(t_data *data)
@@ -68,7 +64,7 @@ void  ft_philo_filler(t_data *data)
   i = 0;
   while (data->philos_nb > i)
   {
-    data->philo[i].philo_id = i;
+    data->philo[i].philo_id = i; //this might lead to a problem!!!
     data->philo[i].eaten = 0;
     data->philo[i].lastmeal = 0;
     data->philo[i].left_fork = i;

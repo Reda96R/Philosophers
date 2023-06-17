@@ -44,5 +44,6 @@ void  ft_philo_filler(t_data *data);
 
 /*::: time :::*/
 long long ft_initial_t(void);
+long long ft_elapsed_time(t_data *data);
 
 #endif 

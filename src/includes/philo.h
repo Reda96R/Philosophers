@@ -12,38 +12,53 @@ typedef struct s_data t_data;
 typedef struct s_philo
 {
   int       philo_id;
-  pthread_t tid;
   int       eaten;
-  long long lastmeal;
+  long long last_meal;
   int       right_fork;
   int       left_fork;
+  pthread_t tid;
   t_data    *data;
 } t_philo;
 
 typedef struct s_data
 {
-  int philos_nb;
-  long long t_to_eat;
-  long long t_to_sleep;
-  long long t_to_die;
-  long long initial_t;
-  int       meals;
-  int       end_meal;
-  int       g_e;
-  t_philo   *philo;
+  int             philos_nb;
+  long long       t_to_eat;
+  long long       t_to_sleep;
+  long long       t_to_die;
+  long long       initial_t;
+  int             m_meals;
+  int             last_meal;
+  int             g_e;
+  t_philo         *philo;
   pthread_mutex_t *fork;
-  pthread_mutex_t cout;
+  pthread_mutex_t output;
   pthread_mutex_t checker;
 } t_data;
+
+/*::: actions :::*/
+void  ft_philo_eat(t_philo *philo);
+void  ft_philo_sleep(t_philo *philo);
+void  ft_philo_think(t_philo *philo);
+
+/*::: session :::*/
+void  ft_session_starter(t_data *data);
+void  ft_referee(t_data *data);
+void  ft_death_check(t_philo *philo);
+void *philo_routine(void *p);
+void  *ft_only_one(void *philo);
+
 
 /*::: utils :::*/
 void  ft_errors_buster(int err_id);
 void ft_args_checker(int ac, char *av[]);
 void  ft_data_filler(t_data *data, char *av[]);
 void  ft_philo_filler(t_data *data);
+void  ft_ph_status(t_philo *philo, char *status);
 
 /*::: time :::*/
 long long ft_initial_t(void);
-long long ft_elapsed_time(t_data *data);
+long long ft_time_elapsed(t_data *data);
+void      ft_sleeping_time(t_philo *philo, int t_to_sleep);
 
 #endif 

@@ -12,12 +12,13 @@
 
 #include "../includes/mylib.h"
 #include <stdint.h>
+#include <limits.h>
 
 int	ft_atoi(const char *str)
 {
 	int	i;
-	int	s;
-	int r;
+	int	  s;
+	long   r;
 
 	i = 0;
 	s = 1;
@@ -33,6 +34,10 @@ int	ft_atoi(const char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		r = r * 10 + str[i] - 48;
+    if (r * s > INT_MAX)
+      return (-1);
+    if (r * s < INT_MIN)
+      return (-1);
 		i++;
 	}
 	return (r * s);

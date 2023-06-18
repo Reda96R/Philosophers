@@ -1,16 +1,13 @@
 OS = $(shell uname -s)
 NAME = philo
 SRC_DIR = src/
-UTI_DIR = src/utils/
 OBJ_DIR = obj/
 OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(FILES)))\
 			 $(addprefix $(OBJ_DIR), $(addsuffix .o, $(FILES_UTILES)))
-FILES = 
-FILES_UTILES = 
-
+FILES = philo ft_actions ft_session ft_time ft_utils
 MYLIB = src/mylib/mylib.a
 MYPRINT = src/mylib/ft_printf/ft_printf.a
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address 
+CFLAGS = -Wall -Wextra -Werror -g -pthread -fsanitize=address 
 
 all: os $(NAME)
 
@@ -26,11 +23,6 @@ $(NAME): $(OBJS)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@echo $(CURSIVE)$(GRAY)":::Making object files:::" $(NONE)
-	@mkdir -p $(OBJ_DIR)
-	@make -s -C src/mylib/
-	@cc $(CFLAGS) -c $< -o $@
-
-$(OBJ_DIR)%.o: $(UTI_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
 	@make -s -C src/mylib/
 	@cc $(CFLAGS) -c $< -o $@
@@ -59,9 +51,18 @@ YELLOW = '\033[0;33m'
 CURSIVE='\033[3m'
 
 os : 
-	@echo $(YELLOW) "            _____         _____         ______        ____________" $(NONE)
-	@echo $(YELLOW) "_______ ___ ___(_)_______ ___(_)___________  /_ _____ ___  /___  /" $(NONE)
-	@echo $(YELLOW) "__  __ \__ \__  / __  __ \__  / __  ___/__  __ \_  _ \__  / __  /" $(NONE)
-	@echo $(YELLOW) "_  / / / / /_  /  _  / / /_  /  _(__  ) _  / / //  __/_  /  _  /" $(NONE)
-	@echo $(YELLOW) "/_/ /_/ /_/ /_/   /_/ /_/ /_/   /____/  /_/ /_/ \___/ /_/   /_/" $(NONE)
-	@echo $(GREEN) "                                                               for $(OS)" $(NONE)
+	@echo $(YELLOW) " .S_sSSs     .S    S.    .S  S.        sSSs_sSSs    " $(NONE)
+	@echo $(YELLOW) ".SS~YS%%b   .SS    SS.  .SS  SS.      d%%SP~YS%%b  " $(NONE)
+	@echo $(YELLOW) "S%S    S%b  S%S    S%S  S%S  S%S     d%S'      S%b  " $(NONE)
+	@echo $(YELLOW) "S%S    S%S  S%S    S%S  S%S  S%S     S%S       S%S " $(NONE)
+	@echo $(YELLOW) "S%S    d*S  S%S SSSS%S  S&S  S&S     S&S       S&S  " $(NONE)
+	@echo $(YELLOW) "S&S   .S*S  S&S  SSS&S  S&S  S&S     S&S       S&S  " $(NONE)
+	@echo $(YELLOW) "S&S_sdSSS   S&S    S&S  S&S  S&S     S&S       S&S " $(NONE)
+	@echo $(YELLOW) "S&S~YSSY    S&S    S&S  S&S  S&S     S&S       S&S " $(NONE)
+	@echo $(YELLOW) "S*S         S*S    S*S  S*S  S*b     S*b       d*S  " $(NONE)
+	@echo $(YELLOW) "S*S         S*S    S*S  S*S  S*S.    S*S.     .S*S " $(NONE)
+	@echo $(YELLOW) "S*S         S*S    S*S  S*S   SSSbs   SSSbs_sdSSS  " $(NONE)
+	@echo $(YELLOW) "S*S         SSS    S*S  S*S    YSSP    YSSP~YSSY   " $(NONE)
+	@echo $(YELLOW) "SP                 SP   SP                         " $(NONE)
+	@echo $(YELLOW) "Y                  Y    Y                          " $(NONE)
+	@echo $(GREEN) "                                            for $(OS)" $(NONE)

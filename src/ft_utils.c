@@ -15,26 +15,27 @@ void  ft_errors_buster(int err_id)
     printf("Input error:\n\tusage: ./philo [nb_of_philos] [time_to_die] [time_to_eat]\
      [time_to_sleep] [nb_of_eats]*\n*optional\n");
   else if (err_id == 2)
-      printf("Error: argument is less or equal to 0\n");
+      printf("Error: one of th arguments is less or equal to 0\n");
+  else if (err_id == 3)
+    printf("Error: all arguments must be integers\n");
   exit (0);
 }
 
 void ft_args_checker(int ac, char *av[])
 {
-  (void)av;
   int i;
-  // int n;
 
-  i = 0;
+  i = 1;
   if (ac < 5 || ac > 6)
     ft_errors_buster(1);
-  // while (av[i])
-  // {
-    // if(!ft_atoi(av[i]))
-      // check if the number is between INT_MAX and INT_MIN
-    // if (n <= 0)
-      // ft_errors_buster(2);
-  // }
+  while (av[i])
+  {
+    if(ft_atoi(av[i]) > INT_MAX || ft_atoi(av[i]) < INT_MIN)
+      ft_errors_buster(3);
+    if (ft_atoi(av[i]) <= 0)
+      ft_errors_buster(2);
+    i++;
+  }
 }
 
 void  ft_data_filler(t_data *data, char *av[])
@@ -47,7 +48,6 @@ void  ft_data_filler(t_data *data, char *av[])
   data->t_to_eat = ft_atoi(av[3]);
   data->t_to_sleep = ft_atoi(av[4]);
   data->initial_t = ft_initial_t();
-  // exit (0);
   data->g_e = 0; 
   if (av[5])
     data->m_meals = ft_atoi(av[5]);
@@ -70,7 +70,7 @@ void  ft_philo_filler(t_data *data)
   i = 0;
   while (data->philos_nb > i)
   {
-    data->philo[i].philo_id = i; //this might lead to a problem!!!
+    data->philo[i].philo_id = i + 1;
     data->philo[i].eaten = 0;
     data->philo[i].last_meal = 0;
     data->philo[i].left_fork = i;

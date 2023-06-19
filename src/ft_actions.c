@@ -1,14 +1,13 @@
 #include "includes/philo.h"
-#include <pthread.h>
 
 void  ft_philo_eat(t_philo *philo)
 {
   if (!philo->data->g_e)
   {
     pthread_mutex_lock(&philo->data->fork[philo->left_fork]);
-    ft_ph_status(philo, "has the first fork 🍴");
+    ft_ph_status(philo, "has the first fork 🥄");
     pthread_mutex_lock(&philo->data->fork[philo->right_fork]);
-    ft_ph_status(philo, "has the second fork 🍴");
+    ft_ph_status(philo, "has the second fork 🥄");
     printf("\033[32m");
     ft_ph_status(philo, "is eating 🥣");
     printf("\033[0m");

@@ -6,11 +6,11 @@ void  *ft_only_one(void *philo)
 
   p = (t_philo *)philo;
   pthread_mutex_lock(&p->data->fork[p->left_fork]);
-  ft_ph_status(p, "has the first fork 🍴");
+  ft_ph_status(p, "has the first fork 🥄");
   p->last_meal = ft_time_elapsed(p->data);
   ft_sleeping_time(p, p->data->t_to_die);
   printf("\033[0;31m");
-  ft_ph_status(p, "dead 💀");
+  ft_ph_status(p, "died 💀");
   printf("\033[0m");
   p->data->g_e = 1;
   return (NULL);
@@ -28,7 +28,7 @@ void  ft_session_starter(t_data *data)
     while (data->philos_nb > i)
     {
       pthread_create(&data->philo[i].tid, NULL, &philo_routine\
-      ,(void *) &data->philo[i]);
+      , (void *) &data->philo[i]);
       i++;
     }
     while (!data->g_e)
@@ -81,6 +81,8 @@ void *philo_routine(void *p)
 
   philo = (t_philo *)p;
   data = philo->data;
+  if (philo->philo_id % 2)
+    usleep(1500);
   while (!data->g_e)
   {
     if (data->m_meals && philo->eaten == data->m_meals)

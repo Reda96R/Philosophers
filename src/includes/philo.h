@@ -5,6 +5,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/time.h>
+# include <limits.h>
 # include "mylib.h"
 
 typedef struct s_data t_data;

@@ -20,7 +20,6 @@ int main(int ac, char *av[])
 {
   t_data *data;
 
-  (void)ac;
   ft_args_checker(ac, av);
   data  = (t_data *)malloc(sizeof (t_data));
   if (!data)

@@ -48,7 +48,7 @@ void  ft_referee(t_data *data);
 void  ft_death_check(t_philo *philo);
 void *philo_routine(void *p);
 void  *ft_only_one(void *philo);
-
+void  ft_session_end(t_data *data);
 
 /*::: utils :::*/
 void  ft_errors_buster(int err_id);

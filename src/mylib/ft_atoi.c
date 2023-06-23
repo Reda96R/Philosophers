@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rerayyad <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rerayyad <rerayyad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:49:41 by rerayyad          #+#    #+#             */
-/*   Updated: 2022/11/02 13:33:51 by rerayyad         ###   ########.fr       */
+/*   Updated: 2023/06/23 22:34:29 by rerayyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 int	ft_atoi(const char *str)
 {
-	int	i;
-	int	  s;
-	long   r;
+	int		i;
+	int		s;
+	long	r;
 
 	i = 0;
 	s = 1;
@@ -34,10 +34,10 @@ int	ft_atoi(const char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		r = r * 10 + str[i] - 48;
-    if (r * s > INT_MAX)
-      return (-1);
-    if (r * s < INT_MIN)
-      return (-1);
+		if (r * s > INT_MAX)
+			return (-1);
+		if (r * s < INT_MIN)
+			return (-1);
 		i++;
 	}
 	return (r * s);

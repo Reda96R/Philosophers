@@ -6,7 +6,7 @@
 /*   By: rerayyad <rerayyad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 12:29:42 by rerayyad          #+#    #+#             */
-/*   Updated: 2022/11/21 15:08:21 by rerayyad         ###   ########.fr       */
+/*   Updated: 2023/06/23 22:33:21 by rerayyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,3 @@ int	ft_printf(const char *format, ...)
 	va_end(arg);
 	return (l);
 }
-

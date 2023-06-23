@@ -6,7 +6,7 @@
 /*   By: rerayyad <rerayyad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 10:55:19 by rerayyad          #+#    #+#             */
-/*   Updated: 2023/04/25 16:45:24 by rerayyad         ###   ########.fr       */
+/*   Updated: 2023/06/23 22:32:58 by rerayyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,5 @@ int	get_next_line(int fd, char **line)
 		return (0);
 	}
 	*line = str;
-  return (1);
+	return (1);
 }

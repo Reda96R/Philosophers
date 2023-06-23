@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rerayyad <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rerayyad <rerayyad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 10:32:34 by rerayyad          #+#    #+#             */
-/*   Updated: 2022/10/29 10:33:55 by rerayyad         ###   ########.fr       */
+/*   Updated: 2023/06/23 22:32:27 by rerayyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ size_t	ft_strlen(const char *str)
 
 	i = 0;
 	if (!str)
-    return (0);
-  while (str[i])
+		return (0);
+	while (str[i])
 		i++;
 	return (i);
 }

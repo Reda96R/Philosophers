@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rerayyad <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rerayyad <rerayyad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 10:59:17 by rerayyad          #+#    #+#             */
-/*   Updated: 2022/11/02 09:47:59 by rerayyad         ###   ########.fr       */
+/*   Updated: 2023/06/23 22:32:44 by rerayyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!s)
-    return (NULL);
-  while (s[i])
+		return (NULL);
+	while (s[i])
 	{
 		if (s[i] == (char)c)
 			return ((char *)s + i);

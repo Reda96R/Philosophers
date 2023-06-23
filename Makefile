@@ -7,7 +7,7 @@ OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(FILES)))\
 FILES = philo ft_actions ft_session ft_time ft_utils
 MYLIB = src/mylib/mylib.a
 MYPRINT = src/mylib/ft_printf/ft_printf.a
-CFLAGS = -Wall -Wextra -Werror -g -pthread -fsanitize=address 
+CFLAGS = -Wall -Wextra -Werror -pthread 
 
 all: os $(NAME)
 
@@ -18,7 +18,7 @@ endif
 $(NAME): $(OBJS)
 	@echo $(GREEN)":::Done:::\n"$(NONE)
 	@echo $(CURSIVE)$(GRAY)":::Compiling $(NAME):::" $(NONE)
-	@cc $(CFLAGS) $(OBJS) $(MYLIB) $(MYPRINT) -o $(NAME)
+	@cc $(CFLAGS) $(OBJS) $(MYLIB) $(MYPRINT) -o $(NAME) #-g -fsanitize=thread 
 	@echo $(GREEN)":::✅ $(NAME) is ready ✅:::"$(NONE)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c

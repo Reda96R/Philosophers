@@ -1,33 +1,44 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_time.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rerayyad <rerayyad@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/23 22:21:35 by rerayyad          #+#    #+#             */
+/*   Updated: 2023/06/23 22:22:00 by rerayyad         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "includes/philo.h"
 
-void  ft_sleeping_time(t_philo *philo, int t_to_sleep)
+void	ft_sleeping_time(t_philo *philo, int t_to_sleep)
 {
-  long long current;
-  long long new_current;
+	long long	current;
+	long long	new_current;
 
-  current = ft_time_elapsed(philo->data);
-  while (1)
-  {
-    new_current = (ft_time_elapsed(philo->data) - current);
-    if (new_current >= t_to_sleep)
-      break ;
-    usleep(1000);
-  }
+	current = ft_time_elapsed(philo->data);
+	while (1)
+	{
+		new_current = (ft_time_elapsed(philo->data) - current);
+		if (new_current >= t_to_sleep)
+			break ;
+		usleep(100);
+	}
 }
 
-long long ft_initial_t(void)
+long long	ft_initial_t(void)
 {
-  struct timeval  initial_t;
+	struct timeval	initial_t;
 
-  gettimeofday(&initial_t, NULL);
-  return ((initial_t.tv_sec * 1000) + (initial_t.tv_usec / 1000));
+	gettimeofday(&initial_t, NULL);
+	return ((initial_t.tv_sec * 1000) + (initial_t.tv_usec / 1000));
 }
 
-long long ft_time_elapsed(t_data *data)
+long long	ft_time_elapsed(t_data *data)
 {
-  struct timeval now;
+	struct timeval	now;
 
-  gettimeofday(&now, NULL);
-  return ((now.tv_sec * 1000) + (now.tv_usec / 1000) - data->initial_t);
+	gettimeofday(&now, NULL);
+	return ((now.tv_sec * 1000) + (now.tv_usec / 1000) - data->initial_t);
 }
-

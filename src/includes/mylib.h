@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   mylib.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rerayyad <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rerayyad <rerayyad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 15:49:24 by rerayyad          #+#    #+#             */
-/*   Updated: 2022/10/29 14:59:28 by rerayyad         ###   ########.fr       */
+/*   Updated: 2023/06/23 22:29:53 by rerayyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef LIBFT_H
-# define LIBFT_H
+
+#ifndef MYLIB_H
+# define MYLIB_H
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -50,6 +51,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
 char	*ft_itoa(int n);
-int   ft_isspace(int c);
-void   ft_arr_free(char **arr);
+int		ft_isspace(int c);
+void	ft_arr_free(char **arr);
 #endif

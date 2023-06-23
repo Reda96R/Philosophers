@@ -18,11 +18,11 @@ void	*ft_only_one(void *philo)
 
 	p = (t_philo *)philo;
 	pthread_mutex_lock(&p->data->fork[p->left_fork]);
-	ft_ph_status(p, "has taken a fork", 1);
+	ft_ph_status(p, "has taken a fork", 0);
 	p->last_meal = ft_time_elapsed(p->data);
 	ft_sleeping_time(p, p->data->t_to_die);
-	ft_ph_status(p, "\033[0;31mdied \033[0m", 1);
-	p->data->g_e = 1;
+	ft_ph_status(p, "\033[0;31mdied \033[0m", 0);
+  p->data->g_e = 1;
 	return (NULL);
 }
 
@@ -32,7 +32,7 @@ void	ft_session_starter(t_data *data)
 
 	i = 0;
 	if (data->philos_nb == 1)
-		ft_only_one(data->philo);
+    ft_only_one(data->philo);
 	else
 	{
 		while (data->philos_nb > i)

@@ -6,7 +6,7 @@
 /*   By: rerayyad <rerayyad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 22:25:11 by rerayyad          #+#    #+#             */
-/*   Updated: 2023/06/23 22:29:12 by rerayyad         ###   ########.fr       */
+/*   Updated: 2023/06/25 16:40:15 by rerayyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ typedef struct s_data
 	pthread_mutex_t				*fork;
 	pthread_mutex_t				output;
 	pthread_mutex_t				checker;
+	pthread_mutex_t				time;
+	pthread_mutex_t				eat;
 }	t_data;
 
 /*::: actions :::*/
@@ -56,15 +58,18 @@ void				ft_philo_think(t_philo *philo);
 
 /*::: session :::*/
 void				ft_session_starter(t_data *data);
-void				ft_referee(t_data *data);
-void				ft_death_check(t_philo *philo);
 void				*philo_routine(void *p);
 void				*ft_only_one(void *philo);
 void				ft_session_end(t_data *data);
 
+/*::: checkers :::*/
+void				ft_referee(t_data *data);
+void				ft_death_check(t_philo *philo);
+void				ft_meals_tracker(t_data *data);
+
 /*::: utils :::*/
-void				ft_errors_buster(int err_id);
-void				ft_args_checker(int ac, char *av[]);
+int					ft_errors_buster(int err_id);
+int					ft_args_checker(int ac, char *av[]);
 void				ft_data_filler(t_data *data, char *av[]);
 void				ft_philo_filler(t_data *data);
 void				ft_ph_status(t_philo *philo, char *status, int n);

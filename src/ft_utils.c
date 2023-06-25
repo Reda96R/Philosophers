@@ -6,7 +6,7 @@
 /*   By: rerayyad <rerayyad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 22:22:08 by rerayyad          #+#    #+#             */
-/*   Updated: 2023/06/23 22:35:21 by rerayyad         ###   ########.fr       */
+/*   Updated: 2023/06/25 16:31:12 by rerayyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,50 +14,47 @@
 
 void	ft_ph_status(t_philo *philo, char *status, int n)
 {
-	if (!philo->data->g_e)
-	{
-		pthread_mutex_lock(&philo->data->output);
-		if (!philo->data->g_e)
-			printf("%lld\t%d\t%s\n", ft_time_elapsed(philo->data), \
-			philo->philo_id, status);
-		if (n)
-		{
-			philo->data->g_e = 1;
-			pthread_mutex_unlock(&philo->data->output);
-			return ;
-		}
-		pthread_mutex_unlock(&philo->data->output);
-	}
+	pthread_mutex_lock(&philo->data->output);
+	printf("%lld %d %s\n", ft_time_elapsed(philo->data), \
+		philo->philo_id, status);
+	if (n)
+		return ;
+	pthread_mutex_unlock(&philo->data->output);
 }
 
-void	ft_errors_buster(int err_id)
+int	ft_errors_buster(int err_id)
 {
 	printf("\033[0;31m");
 	if (err_id == 1)
 		printf("Input error:\n\tusage: ./philo [nb_of_philos] [time_to_die] [time_to_eat]\
-		 [time_to_sleep] [nb_of_eats]*\n*optional\n");
+ [time_to_sleep] [nb_of_eats]*\n\t*optional\n");
 	else if (err_id == 2)
-		printf("Error: one of th arguments is less or equal to 0\n");
-	else if (err_id == 3)
-		printf("Error: all arguments must be integers\n");
-	exit (0);
+		printf("Error: all arguments must be integers and greater than 0\n");
+	return (0);
 }
 
-void	ft_args_checker(int ac, char *av[])
+int	ft_args_checker(int ac, char *av[])
 {
 	int	i;
+	int	j;
 
 	i = 1;
+	j = 0;
 	if (ac < 5 || ac > 6)
-		ft_errors_buster(1);
+		return (ft_errors_buster(1));
 	while (av[i])
 	{
+		while (av[i][j])
+			if (!ft_isdigit(av[i][j++]))
+				return (ft_errors_buster(2));
+		j = 0;
 		if (ft_atoi(av[i]) > INT_MAX || ft_atoi(av[i]) < INT_MIN)
-			ft_errors_buster(3);
+			return (ft_errors_buster(2));
 		if (ft_atoi(av[i]) <= 0)
-			ft_errors_buster(2);
+			return (ft_errors_buster(2));
 		i++;
 	}
+	return (1);
 }
 
 void	ft_data_filler(t_data *data, char *av[])
@@ -69,7 +66,6 @@ void	ft_data_filler(t_data *data, char *av[])
 	data->t_to_die = atoi(av[2]);
 	data->t_to_eat = ft_atoi(av[3]);
 	data->t_to_sleep = ft_atoi(av[4]);
-	data->initial_t = ft_initial_t();
 	if (av[5])
 		data->m_meals = ft_atoi(av[5]);
 	else
@@ -80,6 +76,8 @@ void	ft_data_filler(t_data *data, char *av[])
 	malloc(sizeof (pthread_mutex_t) * data->philos_nb);
 	pthread_mutex_init(&data->checker, NULL);
 	pthread_mutex_init(&data->output, NULL);
+	pthread_mutex_init(&data->time, NULL);
+	pthread_mutex_init(&data->eat, NULL);
 	while (data->philos_nb > i)
 		pthread_mutex_init(&data->fork[i++], NULL);
 	ft_philo_filler(data);

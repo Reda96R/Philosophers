@@ -6,7 +6,7 @@
 /*   By: rerayyad <rerayyad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 22:21:23 by rerayyad          #+#    #+#             */
-/*   Updated: 2023/06/23 22:21:24 by rerayyad         ###   ########.fr       */
+/*   Updated: 2023/06/25 16:40:43 by rerayyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*ft_only_one(void *philo)
 	p->last_meal = ft_time_elapsed(p->data);
 	ft_sleeping_time(p, p->data->t_to_die);
 	ft_ph_status(p, "\033[0;31mdied \033[0m", 0);
-  p->data->g_e = 1;
+	p->data->g_e = 1;
 	return (NULL);
 }
 
@@ -32,7 +32,7 @@ void	ft_session_starter(t_data *data)
 
 	i = 0;
 	if (data->philos_nb == 1)
-    ft_only_one(data->philo);
+		ft_only_one(data->philo);
 	else
 	{
 		while (data->philos_nb > i)
@@ -46,46 +46,6 @@ void	ft_session_starter(t_data *data)
 	}
 }
 
-void	ft_referee(t_data *data)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (!data->g_e)
-	{
-		ft_death_check(&data->philo[i]);
-		if (data->m_meals)
-		{
-			while (data->philos_nb > j)
-			{
-				if (data->m_meals > data->philo[j].eaten)
-					break ;
-				j++;
-			}
-			if (data->philos_nb == j)
-				data->g_e = 1;
-		}
-		usleep(100);
-		if (i == (data->philos_nb - 1))
-			i = -1;
-		i++;
-	}
-}
-
-void	ft_death_check(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->data->checker);
-	if ((ft_time_elapsed(philo->data) - philo->last_meal) \
-	>= philo->data->t_to_die)
-	{
-		ft_ph_status(philo, "\033[0;31mdied \033[0m", 1);
-		philo->data->g_e = 1;
-	}
-	pthread_mutex_unlock(&philo->data->checker);
-}
-
 void	*philo_routine(void *p)
 {
 	t_philo	*philo;
@@ -94,8 +54,8 @@ void	*philo_routine(void *p)
 	philo = (t_philo *)p;
 	data = philo->data;
 	if (philo->philo_id % 2)
-		usleep(1500);
-	while (!data->g_e)
+		usleep(20000);
+	while (1)
 	{
 		if (data->m_meals && philo->eaten == data->m_meals)
 			break ;
@@ -104,4 +64,20 @@ void	*philo_routine(void *p)
 		ft_philo_think(philo);
 	}
 	return (NULL);
+}
+
+void	ft_session_end(t_data *data)
+{
+	int	i;
+
+	i = data->philos_nb;
+	while (--i >= 0)
+		pthread_detach(data->philo[i].tid);
+	while (++i < data->philos_nb)
+		pthread_mutex_destroy(&data->fork[i]);
+	pthread_mutex_destroy(&data->output);
+	pthread_mutex_destroy(&data->checker);
+	free(data->fork);
+	free(data->philo);
+	free(data);
 }
